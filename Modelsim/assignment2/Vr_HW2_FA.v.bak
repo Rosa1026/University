@@ -1,0 +1,20 @@
+module Vr_HW2_FA(A, B, CIN, S, COUT);
+  input A, B, CIN;
+  output S, COUT;
+
+  /* Implementation 5: complete the design of a full adder */
+  wire L1,L2,L3,L4,L5,L6,L7,L8,L9,L10;
+  not U1(A,L1);
+  not U2(B,L2);
+  not U3(CIN,L3);
+  or U4(L4,A,L2,L3);
+  or U5(L5,L1,B,L3);
+  or U6(L6,L1,L2,CIN);
+  or U7(L7,A,B,CIN);
+  and U8(S,L4,L5,L6,L7);
+
+  or U9(L8,A,B);
+  or U10(L9,A,CIN);
+  or U11(L10,B,CIN);
+  and U12(COUT,L8,L9,L10);
+endmodule

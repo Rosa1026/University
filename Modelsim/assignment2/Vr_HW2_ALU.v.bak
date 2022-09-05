@@ -1,0 +1,24 @@
+module Vr_HW2_ALU (A, B, ALUCtrl, ALUOut, Zero);
+  input [31:0] A;
+  input [31:0] B;
+  input [2:0] ALUCtrl;
+  output [31:0] ALUOut;
+  output Zero;
+
+  wire [31:0] sig_a;
+  wire [31:0] sig_b;
+  wire [31:0] sig_sum;
+  wire sig_cin;
+  wire sig_cout;
+
+  wire [31:0] Binvert;
+  /* Implementation 7: ALU design using only 1 ripple adder instance */
+  /* ALU Control - 010: add, 110: sub */
+  assign sig_a=A;
+  assign ALUOut=sig_sum;
+  assign Zero=(ALUCtrl==3'b110)&(sig_sum==0);
+  assign sig_b=(ALUCtrl==3'b110) ? ~B:B;
+  assign sig_cin=(ALUCtrl==3'b110) ? 1'b1:1'b0;
+
+  Vr_HW2_ripple_adder_M_bits #(.M(32)) u_adder (sig_a,sig_b,sig_cin,sig_sum,sig_cout);
+endmodule
